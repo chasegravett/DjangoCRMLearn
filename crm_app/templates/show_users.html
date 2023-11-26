@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="col-md-12">
+    <br>
+
+    {% if user.username != 'admin' %}
+    <h3>You do not have authorization to view this page</h3>
+
+    {% else %}
+        <h1>All Active Users</h1>
+        <div class="dropdown-center">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort by
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'users_sorted_first_name' %}">First Name</a></li>
+              <li><a class="dropdown-item" href="{% url 'users_sorted_last_name' %}">Last Name</a></li>
+              <li><a class="dropdown-item" href="{% url 'users_sorted_creation' %}">Creation Date</a></li>
+              <li><a class="dropdown-item" href="{% url 'users_sorted_street' %}">Street Address</a></li>
+              <li><a class="dropdown-item" href="{% url 'users_sorted_state' %}">State</a></li>
+              <li><a class="dropdown-item" href="{% url 'users_sorted_email' %}">Email</a></li>
+              <li><a class="dropdown-item" href="{% url 'users_sorted_phone' %}">Phone #</a></li>
+            </ul>
+          </div>
+        <br>
+
+        {% if customers %}
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <caption>List of users</caption>
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Street</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Zip Code</th>
+                        <th scope="col">Account Created</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <th scope="row">{{ customer.id }}</th>
+                            <th scope="row">{{ customer.first_name }} {{ customer.last_name }}</th>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.phone }}</td>
+                            <td>{{ customer.street_address }}</td>
+                            <td>{{ customer.city }}</td>
+                            <td>{{ customer.state }}</td>
+                            <td>{{ customer.zipcode }}</td>
+                            <td>{{ customer.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+                
+
+        {% endif %}
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

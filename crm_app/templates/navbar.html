@@ -1,0 +1,54 @@
+<nav class="navbar bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      
+        <a class="navbar-brand" href="{% url 'home' %}">Koku's</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Log In</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'register' %}">New User?</a>
+                </li>
+                {% endif %}
+                
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% endif %}
+
+                {% if user.is_authenticated and user.username == 'admin' %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin Options
+                    </a>
+                    
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'users' %}">Show All Users</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item" href="#">Add New User</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item" href="#">Edit Users</a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
