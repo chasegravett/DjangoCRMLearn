@@ -66,7 +66,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'crmdb',
         'USER': 'postgres',
-        'PASSWORD': 'Pickledpickles1!',
+        'PASSWORD': '***********',
         'HOST': 'localhost',
         'PORT': 5432,
     }
